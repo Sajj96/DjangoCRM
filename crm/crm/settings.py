@@ -126,6 +126,8 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = '/site/'
 LOGOUT_REDIRECT_URL = '/site/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 

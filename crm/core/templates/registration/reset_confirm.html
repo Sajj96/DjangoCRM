@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if validlink %}
+  <div class="login-area">
+    <div class="container">
+      {% if form.subject.errors %}
+      <ol>
+        {% for error in form.subject.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+      </ol>
+      {% endif %} 
+      {% if messages %}
+      <div class="alert alert-info text-center" role="alert">
+        {% for message in messages %}
+        <strong {% if message.tags %} class="{{ message.tags }}" {% endif %}
+          >{{ message }}</strong
+        >
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="login-box ptb--100">
+        <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          <div class="login-form-head">
+            <h4>Change Password</h4>
+          </div>
+          <div class="login-form-body">
+            <div class="form-gp">
+              <label for="exampleInputPassword2">New Password</label>
+              {{ form.new_password1 }}
+              <i class="ti-lock"></i>
+            </div>
+            <div class="form-gp">
+              <label for="exampleInputPassword2">Confirm Password</label>
+              {{ form.new_password2 }}
+              <i class="ti-lock"></i>
+            </div>
+            <div class="submit-btn-area mt-5">
+              <button id="form_submit" type="submit">
+                Reset <i class="ti-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <p class="text-danger text-center">
+      The password reset link was invalid, possibly because it has already been used.
+      Please request a new password reset.
+    </p>
+  {% endif %}
+{% endblock %}
