@@ -1,0 +1,116 @@
+{% load static %}
+
+<!-- page container area start -->
+<div class="page-container">
+  <!-- sidebar menu area start -->
+  <div class="sidebar-menu">
+    <div class="sidebar-header">
+      <div class="logo">
+        <a href="index.html"
+          ><img src="{% static 'assets/images/icon/logo.png' %}" alt="logo"
+        /></a>
+      </div>
+    </div>
+    <div class="main-menu">
+      <div class="menu-inner">
+        <nav>
+          <ul class="metismenu" id="menu">
+            <li class="active">
+              <a href="{% url 'site' %}"
+                ><i class="ti-dashboard"></i><span>dashboard</span></a
+              >
+            </li>
+            <li>
+              <a href="javascript:void(0)" aria-expanded="true"
+                ><i class="fa fa-users"></i> <span>Users</span></a
+              >
+              <ul class="collapse">
+                <li>
+                  <a href="#">
+                    <i class="fa fa-user-plus"></i>
+                    <span>Create User</span></a
+                  >
+                </li>
+                <li>
+                  <a href="{% url 'userlist' %}">
+                    <i class="fa fa-list"></i>
+                    <span>User list</span></a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:void(0)" aria-expanded="true"
+                ><i class="fa fa-align-left"></i>
+                <span>Multi level menu</span></a
+              >
+              <ul class="collapse">
+                <li><a href="#">Item level (1)</a></li>
+                <li><a href="#">Item level (1)</a></li>
+                <li>
+                  <a href="#" aria-expanded="true">Item level (1)</a>
+                  <ul class="collapse">
+                    <li><a href="#">Item level (2)</a></li>
+                    <li><a href="#">Item level (2)</a></li>
+                    <li><a href="#">Item level (2)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Item level (1)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- sidebar menu area end -->
+  <div class="container">
+    <!-- main content area start -->
+    <div class="main-content">
+      <!-- header area start -->
+      <div class="header-area">
+        <div class="row align-items-center">
+          <!-- nav and search button -->
+          <div class="col-md-6 col-sm-8 clearfix">
+            <div class="nav-btn pull-left">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="search-box pull-left">
+              <form action="#">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Search..."
+                  required
+                />
+                <i class="ti-search"></i>
+              </form>
+            </div>
+          </div>
+          <!-- profile info & task notification -->
+          <div class="col-md-6 col-sm-4 clearfix">
+            <div class="user-profile pull-right">
+              <img
+                class="avatar user-thumb"
+                src="{% static 'assets/images/author/avatar.png' %}"
+                alt="avatar"
+              />
+              <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
+                {{ user.first_name }} {{ user.last_name }}<i
+                  class="fa fa-angle-down"
+                ></i>
+              </h4>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Message</a>
+                <a class="dropdown-item" href="{% url 'change_password' %}"
+                  >Change Password</a
+                >
+                <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- header area end -->

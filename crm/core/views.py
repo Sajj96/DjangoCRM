@@ -8,11 +8,14 @@ from django.utils.http import is_safe_url, urlsafe_base64_decode
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, get_user_model
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
 from .models import CrmUser
 from core.forms import SignUpForm, LoginForm 
 
-# Create your views here.
 
+@csrf_protect
+@never_cache
 def index(request):
     form = LoginForm()
 
@@ -70,6 +73,8 @@ def logout_user(request):
     }
     return render(request, 'registration/login.html', context)
 
+@csrf_protect
+@login_required(login_url='/')
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -86,6 +91,7 @@ def change_password(request):
         'form': form
     })
 
+@csrf_protect
 def password_reset(request):
     if request.method == "POST":
         form = PasswordResetForm(request.POST)
@@ -113,7 +119,7 @@ def password_reset(request):
 def reset_done(request):
     return render(request, 'registration/reset_done.html', {})
 
-
+@never_cache
 def reset_confirm(request, uidb64 = None,token = None):
     CrmUser = get_user_model()
     token_generator=default_token_generator
@@ -151,3 +157,8 @@ def reset_confirm(request, uidb64 = None,token = None):
 
 def reset_complete(request):
     return render(request, 'registration/reset_complete.html', {})
+
+
+@login_required(login_url='/') 
+def userlist(request):
+    return render(request, 'main/user-list.html', {}) 
